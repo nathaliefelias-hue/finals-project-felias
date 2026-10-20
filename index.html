@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio - Nathalie Felias</title>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts: Outfit -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap">
+    <!-- Three.js Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- 3D Background Canvas -->
+    <div id="canvas-container"></div>
+
+    <!-- PAGE 1: LOGIN / WELCOME SCREEN -->
+    <main id="login-page" class="page active">
+        <div class="glass-panel login-card">
+            <div class="brand-icon">
+                <i class="fa-solid fa-shapes"></i>
+            </div>
+            <h1>Welcome Back</h1>
+            <p>Enter your credentials or click below to explore Nathalie's portfolio.</p>
+
+            <form onsubmit="navigateToDashboard(event)">
+                <div class="form-group">
+                    <label>USERNAME / EMAIL</label>
+                    <div class="input-wrapper">
+                        <i class="fa-regular fa-envelope"></i>
+                        <input type="email" id="email-input" value="nathaliefelias@gmail.com" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>PASSWORD</label>
+                    <div class="input-wrapper">
+                        <i class="fa-solid fa-lock"></i>
+                        <input type="password" value="••••••••" required>
+                    </div>
+                </div>
+
+                <button type="button" class="btn-primary" onclick="navigateToDashboard(event)">
+                    See My Portfolio <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </form>
+
+            <div class="login-tip">
+                <i class="fa-solid fa-circle-info"></i>
+                <span>Tip: Click directly to view the 3D Interactive Portfolio!</span>
+            </div>
+        </div>
+    </main>
+
+    <!-- PAGE 2: MAIN DASHBOARD PORTFOLIO -->
+    <main id="dashboard-page" class="page">
+        <!-- Application Header / Navigation -->
+        <header class="glass-panel app-header">
+            <div class="profile.jpg-container">
+                <div class="profile.jpg-mini">
+                    <img src="profile.jpg" alt="nathalie felias">
+                </div>
+                <div class="profile-info-mini">
+                    <h2>Nathalie Felias</h2>
+                    <span>STUDENT & DEVELOPER</span>
+                </div>
+            </div>
+
+            <nav class="nav-tabs">
+                <button type="button" class="tab-btn active" onclick="switchTab('about')">
+                    <i class="fa-solid fa-user"></i> About Me
+                </button>
+                <button type="button" class="tab-btn" onclick="switchTab('skills')">
+                    <i class="fa-solid fa-lightbulb"></i> My Skills
+                </button>
+                <button type="button" class="tab-btn" onclick="switchTab('projects')">
+                    <i class="fa-solid fa-code"></i> My Projects
+                </button>
+                <button type="button" class="tab-btn" onclick="switchTab('achievements')">
+                    <i class="fa-solid fa-trophy"></i> My Achievements
+                </button>
+                <button type="button" class="tab-btn" onclick="switchTab('goals')">
+                    <i class="fa-solid fa-bullseye"></i> My Goals
+                </button>
+                <button type="button" class="tab-btn" onclick="switchTab('contact')">
+                    <i class="fa-solid fa-paper-plane"></i> Contact Me
+                </button>
+            </nav>
+
+            <div class="header-controls">
+                <button type="button" class="btn-secondary" onclick="reset3DView()">
+                    <i class="fa-solid fa-rotate-right"></i> Reset View
+                </button>
+                <button type="button" class="btn-secondary" onclick="logout()">
+                    <i class="fa-solid fa-right-from-bracket"></i> Exit
+                </button>
+            </div>
+        </header>
+
+        <!-- SECTION 1: ABOUT ME -->
+        <section id="about-section" class="section-content active">
+            <!-- Hero Card -->
+            <div class="glass-panel about-hero">
+                <div class="profile-img-container" onclick="openPhotoModal()">
+                    <img id="main-profile-img" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=500" alt="Nathalie Felias">
+                    <div class="img-overlay">
+                        <i class="fa-solid fa-camera"></i>
+                        <span>Change Photo</span>
+                    </div>
+                    <span class="status-badge">Active</span>
+                </div>
+
+                <div class="hero-text-content">
+                    <div class="hero-text-header">
+                        <h1>Nathalie Felias</h1>
+                        <button type="button" class="btn-secondary btn-sm" onclick="openPhotoModal()">
+                            <i class="fa-solid fa-pen-to-square"></i> Edit Photo
+                        </button>
+                    </div>
+                    <p class="quote-tag">"I may not stand out first, but I show up always"</p>
+                    <p class="hero-description">
+                        I am 19 years old and currently studying at Datamex College of Saint Adeline. I was born with a condition called cleft palate, meaning I do not have a hard palate (ngala-ngala), but that has never stopped me from growing as a person.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Details Grid -->
+            <div class="about-grid">
+                <!-- Short Biography -->
+                <div class="glass-card">
+                    <div class="card-header">
+                        <div class="card-icon"><i class="fa-solid fa-book-open"></i></div>
+                        <h3>Short Biography</h3>
+                    </div>
+                    <div class="card-content">
+                        <p>I am currently studying Associate in Computer Technology. My journey has been a bit of a rocky road since I was not very familiar with technology at first, but I am learning every day. So far, I have built Java login forms and am continuing to expand my skills. I am not done yet—the next time you view this portfolio, you will be impressed!</p>
+                    </div>
+                </div>
+
+                <!-- Academic Program -->
+                <div class="glass-card">
+                    <div class="card-header">
+                        <div class="card-icon"><i class="fa-solid fa-graduation-cap"></i></div>
+                        <h3>Academic Program</h3>
+                    </div>
+                    <div class="card-content">
+                        <div class="academic-detail">
+                            <label>DEGREE / COURSE</label>
+                            <p>Bachelor of Science in Information Technology (Association Computer Technology)</p>
+                        </div>
+                        <div class="academic-detail">
+                            <label>UNIVERSITY / SCHOOL</label>
+                            <p>Datamex College Of Saint Adeline</p>
+                        </div>
+                        <div class="academic-detail">
+                            <label>YEAR / STATUS</label>
+                            <span class="status-pill">Second Year</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Hobbies -->
+                <div class="glass-card">
+                    <div class="card-header">
+                        <div class="card-icon"><i class="fa-solid fa-heart"></i></div>
+                        <h3>Hobbies</h3>
+                    </div>
+                    <div class="card-content">
+                        <div class="tag-cloud">
+                            <span class="tag"><i class="fa-solid fa-book"></i> Reading</span>
+                            <span class="tag"><i class="fa-solid fa-music"></i> Listening to Music</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Interests -->
+                <div class="glass-card">
+                    <div class="card-header">
+                        <div class="card-icon"><i class="fa-solid fa-compass"></i></div>
+                        <h3>Interests</h3>
+                    </div>
+                    <div class="card-content">
+                        <div class="tag-cloud">
+                            <span class="tag"><i class="fa-solid fa-book-bookmark"></i> Reading Books</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 2: SKILLS -->
+        <section id="skills-section" class="section-content">
+            <div class="glass-panel skills-container">
+                <div class="section-title-group">
+                    <h2>Core Technical Skill</h2>
+                    <p>Key technical proficiencies and development tools I am currently mastering</p>
+                </div>
+
+                <div class="skills-grid">
+                    <div class="glass-card skill-card">
+                        <div class="skill-info">
+                            <span class="skill-name"><i class="fa-brands fa-java"></i> Java Programming</span>
+                            <span class="skill-percent">75%</span>
+                        </div>
+                        <div class="skill-bar"><div class="skill-progress" style="width: 75%;"></div></div>
+                    </div>
+
+                    <div class="glass-card skill-card">
+                        <div class="skill-info">
+                            <span class="skill-name"><i class="fa-brands fa-html5"></i> HTML5 & CSS3</span>
+                            <span class="skill-percent">85%</span>
+                        </div>
+                        <div class="skill-bar"><div class="skill-progress" style="width: 85%;"></div></div>
+                    </div>
+
+                    <div class="glass-card skill-card">
+                        <div class="skill-info">
+                            <span class="skill-name"><i class="fa-brands fa-js"></i> JavaScript</span>
+                            <span class="skill-percent">70%</span>
+                        </div>
+                        <div class="skill-bar"><div class="skill-progress" style="width: 70%;"></div></div>
+                    </div>
+
+                    <div class="glass-card skill-card">
+                        <div class="skill-info">
+                            <span class="skill-name"><i class="fa-solid fa-cubes"></i> 3D Web Animation</span>
+                            <span class="skill-percent">80%</span>
+                        </div>
+                        <div class="skill-bar"><div class="skill-progress" style="width: 80%;"></div></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 3: PROJECTS -->
+        <section id="projects-section" class="section-content">
+            <div class="section-title-group">
+                <h2>Featured Projects</h2>
+                <p>Explore my projects and web applications created during my studies.</p>
+            </div>
+
+            <div class="projects-grid">
+                <!-- Project 1 -->
+                <div class="glass-card project-card">
+                    <div class="project-preview">
+                        <i class="fa-solid fa-cube"></i>
+                    </div>
+                    <div class="project-body">
+                        <h3>3D Animation Portfolio</h3>
+                        <p>An interactive, glassmorphic portfolio website with real-time 3D butterfly particle animations built using Three.js.</p>
+                        <div class="project-tags">
+                            <span>Three.js</span>
+                            <span>HTML/CSS</span>
+                            <span>JavaScript</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="glass-card project-card">
+                    <div class="project-preview">
+                        <i class="fa-solid fa-id-card"></i>
+                    </div>
+                    <div class="project-body">
+                        <h3>Registration Form</h3>
+                        <p>User registration interface featuring input validation and modern user experience principles.</p>
+                        <div class="project-tags">
+                            <span>HTML5</span>
+                            <span>CSS3</span>
+                            <span>Validation</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 3 -->
+                <div class="glass-card project-card">
+                    <div class="project-preview">
+                        <i class="fa-solid fa-right-to-bracket"></i>
+                    </div>
+                    <div class="project-body">
+                        <h3>Login Form Application</h3>
+                        <p>A functional and styled login authentication interface developed as part of coursework.</p>
+                        <div class="project-tags">
+                            <span>Java</span>
+                            <span>UI Design</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 4: ACHIEVEMENTS -->
+        <section id="achievements-section" class="section-content">
+            <div class="glass-panel contact-container">
+                <div class="section-title-group">
+                    <h2>My Achievements</h2>
+                    <p>Milestones and accomplishments during my studies.</p>
+                </div>
+                <div class="achievements-grid">
+                    <div class="glass-card achievement-card">
+                        <div class="achievement-icon"><i class="fa-solid fa-trophy"></i></div>
+                        <div>
+                            <h4>Registration Form Project</h4>
+                            <p>Successfully completed functional web form module</p>
+                        </div>
+                    </div>
+                    <div class="glass-card achievement-card">
+                        <div class="achievement-icon"><i class="fa-solid fa-trophy"></i></div>
+                        <div>
+                            <h4>Login Form GUI</h4>
+                            <p>Designed desktop/web authentication UI</p>
+                        </div>
+                    </div>
+                    <div class="glass-card achievement-card">
+                        <div class="achievement-icon"><i class="fa-solid fa-trophy"></i></div>
+                        <div>
+                            <h4>3D Animation Portfolio</h4>
+                            <p>Created interactive Three.js 3D web experience</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 5: GOALS -->
+        <section id="goals-section" class="section-content">
+            <div class="glass-panel contact-container">
+                <div class="section-title-group">
+                    <h2>My Goals</h2>
+                    <p>What I am striving to achieve in the near future.</p>
+                </div>
+                <div class="about-grid">
+                    <div class="glass-card">
+                        <div class="card-header">
+                            <div class="card-icon"><i class="fa-solid fa-bullseye"></i></div>
+                            <h3>Personal & Career Goals</h3>
+                        </div>
+                        <div class="card-content">
+                            <p style="font-size: 1.15rem; color: white; font-weight: 500; line-height: 1.6;">
+                                To graduate peacefully and to have work.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 6: CONTACT -->
+        <section id="contact-section" class="section-content">
+            <div class="glass-panel contact-container">
+                <div class="section-title-group">
+                    <h2>Contact Me</h2>
+                    <p>Feel free to reach out to me through my official channels below.</p>
+                </div>
+
+                <div class="contact-grid">
+                    <a href="https://facebook.com/nathaliefelias" target="_blank" class="glass-card contact-card">
+                        <div class="contact-icon fb"><i class="fa-brands fa-facebook-f"></i></div>
+                        <div class="contact-info">
+                            <label>FACEBOOK</label>
+                            <p>nathaliefelias</p>
+                        </div>
+                    </a>
+
+                    <a href="mailto:nathaliefelias@gmail.com" class="glass-card contact-card">
+                        <div class="contact-icon email"><i class="fa-regular fa-envelope"></i></div>
+                        <div class="contact-info">
+                            <label>EMAIL ME</label>
+                            <p>nathaliefelias@gmail.com</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- PHOTO EDITING MODAL -->
+    <div id="photo-modal" class="modal-overlay">
+        <div class="glass-panel modal-card">
+            <div class="modal-header">
+                <h3>Update Profile Picture</h3>
+                <button type="button" class="close-modal" onclick="closePhotoModal()"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+
+            <div class="photo-preview-box">
+                <img id="preview-img" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=500" alt="Preview">
+            </div>
+
+            <div class="form-group">
+                <label>Upload Image File</label>
+                <div class="input-wrapper">
+                    <input type="file" id="photo-file-input" accept="image/*" onchange="handleFileUpload(event)">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>OR Paste Image URL</label>
+                <div class="input-wrapper">
+                    <i class="fa-solid fa-link"></i>
+                    <input type="url" id="photo-url-input" placeholder="https://example.com/photo.jpg" oninput="handleUrlInput(event)">
+                </div>
+            </div>
+
+            <div class="modal-actions">
+                <button type="button" class="btn-secondary" onclick="closePhotoModal()">Cancel</button>
+                <button type="button" class="btn-primary" onclick="saveProfilePhoto()">Save Picture</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Custom JS Script -->
+    <script src="script.js"></script>
+</body>
+</html>
